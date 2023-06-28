@@ -1,5 +1,7 @@
 pipeline {
-	agent none
+	agent {
+		label 'adi'
+	}
 	tools {
         maven 'm1' 
     }
