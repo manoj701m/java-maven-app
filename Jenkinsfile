@@ -1,5 +1,5 @@
 pipeline {
-	agent None
+	agent none
 	tools {
         maven 'm1' 
     }
