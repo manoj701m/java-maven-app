@@ -1,10 +1,5 @@
 pipeline {
-	agent {
-		label 'adi'
-	}
-	tools {
-        maven 'm1' 
-    }
+	agent any
 	stages {
 		stage ('build') {
 			steps {
