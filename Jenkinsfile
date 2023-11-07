@@ -9,7 +9,7 @@ pipeline {
 		}
 		stage ('test') {
 			steps {
-				sh 'mvn tes'
+				sh 'mvn test'
 			}
 			post {
 				always {
