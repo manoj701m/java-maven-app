@@ -31,7 +31,7 @@ pipeline {
                     
                     // Push Docker image to Docker Hub
                     echo "Pushing Docker image to Docker Hub"
-                    sh "docker push -x ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:${TAG}"
+                    sh "docker push ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:${TAG}"
                 }
             }
         }
