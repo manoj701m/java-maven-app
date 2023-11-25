@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
         DOCKERHUB_USERNAME = 'manoj701m'
+        DOCKERHUB_PASSWORD = 'Mrmanojn1'
         IMAGE_NAME = 'tomcat8custom'
         TAG = "${env.BUILD_NUMBER}"
     }
@@ -22,16 +23,16 @@ pipeline {
             steps {
                 script {
                     // Docker login using credentials
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                        docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
-                            // Build Docker image
-                            echo "Building Docker image"
-                            docker.build("$DOCKERHUB_USERNAME/$IMAGE_NAME:$TAG", ".")
-                            
-                            // Push Docker image to Docker Hub
-                            echo "Pushing Docker image to Docker Hub"
-                            docker.push("$DOCKERHUB_USERNAME/$IMAGE_NAME:$TAG")
-                        }
+                    echo "Logging in to Docker Hub"
+                    docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD"
+                    
+                    // Build Docker image
+                    echo "Building Docker image"
+                    docker.build("$DOCKERHUB_USERNAME/$IMAGE_NAME:$TAG", ".")
+                    
+                    // Push Docker image to Docker Hub
+                    echo "Pushing Docker image to Docker Hub"
+                    docker.push("$DOCKERHUB_USERNAME/$IMAGE_NAME:$TAG")
                     }
                 }
             }
