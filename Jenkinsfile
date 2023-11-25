@@ -8,6 +8,18 @@ pipeline {
         TAG = "${env.BUILD_NUMBER}"
     }
 
+    stage('Check Username') {
+            steps {
+                script {
+                    // Use 'whoami' command to get the current username
+                    def username = sh(script: 'whoami', returnStdout: true).trim()
+
+                    // Print the username
+                    echo "Current username: ${username}"
+                }
+            }
+        }
+    
     stages {
         stage('Checkout') {
             steps {
