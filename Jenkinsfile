@@ -36,14 +36,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            script {
-                // Cleanup: Logout from Docker Hub after the job is done
-                echo "Logging out from Docker Hub"
-                docker.logout
-            }
-        }
-    }
 }
