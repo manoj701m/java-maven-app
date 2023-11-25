@@ -7,8 +7,9 @@ pipeline {
         IMAGE_NAME = 'tomcat8custom'
         TAG = "${env.BUILD_NUMBER}"
     }
-
-    stage('Check Username') {
+    
+    stages {
+        stage('Check Username') {
             steps {
                 script {
                     // Use 'whoami' command to get the current username
@@ -19,8 +20,7 @@ pipeline {
                 }
             }
         }
-    
-    stages {
+        
         stage('Checkout') {
             steps {
                 script {
