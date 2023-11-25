@@ -21,16 +21,15 @@ pipeline {
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                    # Docker login
+                    // # Docker login
                     echo "Logging in to Docker Hub"
-                    // Docker login using credentials
                     docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) 
                     {
-                    # Build Docker image
+                    // # Build Docker image
                     echo "Building Docker image"
                     docker build -t "$DOCKERHUB_USERNAME/$IMAGE_NAME:$TAG" .
 
-                    # Push Docker image to Docker Hub
+                    // # Push Docker image to Docker Hub
                     echo "Pushing Docker image to Docker Hub"
                     docker push "$DOCKERHUB_USERNAME/$IMAGE_NAME:$TAG"
                     }
@@ -42,11 +41,10 @@ pipeline {
     post {
         always {
             script {
-                # Cleanup: Logout from Docker Hub after the job is done
+                // # Cleanup: Logout from Docker Hub after the job is done
                 echo "Logging out from Docker Hub"
                 docker logout
             }
         }
     }
 }
-
