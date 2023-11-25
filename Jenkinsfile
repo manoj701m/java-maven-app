@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKERHUB_USERNAME = 'manoj701m'
         DOCKERHUB_PASSWORD = 'Mrmanojn1'
-        IMAGE_NAME = 'SimpleJavaApp'
+        IMAGE_NAME = 'simplejavaapp'
         TAG = "${env.BUILD_NUMBER}"
         DOCKERFILE_PATH = 'Dockerfile'
     }
