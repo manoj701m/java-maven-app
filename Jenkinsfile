@@ -6,7 +6,7 @@ pipeline {
         DOCKERHUB_PASSWORD = 'Mrmanojn1'
         IMAGE_NAME = 'simplejavaapp'
         TAG = "${env.BUILD_NUMBER}"
-        DOCKERFILE_PATH = 'Dockerfile'
+        DOCKERFILE_PATH = './Dockerfile'
     }
     
     stages {
@@ -48,7 +48,7 @@ pipeline {
 
                     // Build Docker image
                     echo "Building Docker image"
-                    sh "docker build -t ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:${TAG} ${DOCKERFILE_PATH}"
+                    sh "docker build -t ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:${TAG} -f ${DOCKERFILE_PATH}"
                     
                     // Push Docker image to Docker Hub
                     echo "Pushing Docker image to Docker Hub"
