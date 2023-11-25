@@ -25,7 +25,7 @@ pipeline {
                     // Docker login using credentials
                     echo "Logging in to Docker Hub"
                     docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD"
-                    
+
                     // Build Docker image
                     echo "Building Docker image"
                     docker.build("$DOCKERHUB_USERNAME/$IMAGE_NAME:$TAG", ".")
@@ -48,4 +48,3 @@ pipeline {
             }
         }
     }
-}
