@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     // Checkout the Git repository
-                    git branch: 'master', url: 'https://github.com/keerthan-ashok/Amazon.git'
+                    git branch: 'master', url: 'https://github.com/manoj701m/Amazon.git'
                 }
             }
         }
