@@ -24,27 +24,27 @@ pipeline {
                 script {
                     // Docker login using credentials
                     echo "Logging in to Docker Hub"
-                    docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD"
+                    docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
+                        // Build Docker image
+                        echo "Building Docker image"
+                        def customImage = docker.build("$DOCKERHUB_USERNAME/$IMAGE_NAME:$TAG", ".")
 
-                    // Build Docker image
-                    echo "Building Docker image"
-                    docker.build("$DOCKERHUB_USERNAME/$IMAGE_NAME:$TAG", ".")
-                    
-                    // Push Docker image to Docker Hub
-                    echo "Pushing Docker image to Docker Hub"
-                    docker.push("$DOCKERHUB_USERNAME/$IMAGE_NAME:$TAG")
+                        // Push Docker image to Docker Hub
+                        echo "Pushing Docker image to Docker Hub"
+                        customImage.push()
                     }
                 }
             }
         }
     }
 
-   post {
-    always {
-        script {
-            // Cleanup: Logout from Docker Hub after the job is done
-            echo "Logging out from Docker Hub"
-            sh 'docker logout'
+    post {
+        always {
+            script {
+                // Cleanup: Logout from Docker Hub after the job is done
+                echo "Logging out from Docker Hub"
+                docker.logout()
+            }
         }
     }
 }
