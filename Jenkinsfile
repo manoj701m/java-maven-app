@@ -34,7 +34,6 @@ pipeline {
             steps {
                 script {
                     // Run Maven build
-                    sh 'cd Amazon/'
                     sh 'mvn clean install'
                 }
             }
