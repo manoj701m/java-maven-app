@@ -1,5 +1,22 @@
 FROM ubuntu:latest
-RUN apt-get -y update && apt-get -y upgrade && apt-get -y install openjdk-8-jdk wget && mkdir /usr/local/tomcat && cd /usr/local/ && wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.96/bin/apache-tomcat-8.5.96.tar.gz && tar zxvf apache-tomcat-8.5.96.tar.gz && cp -rf /apache-tomcat-8.5.96/* /usr/local/tomcat/   
-WORKDIR /usr/local/tomcat
+
+RUN apt-get update && \
+    apt-get install -y openjdk-11-jdk
+
+# Set environment variables for Java
+ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
+ENV PATH $PATH:$JAVA_HOME/bin
+
+# Download and install Apache Tomcat
+ENV TOMCAT_VERSION 9.0.50
+RUN apt-get install -y wget && \
+    wget https://archive.apache.org/dist/tomcat/tomcat-9/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+    tar -xf apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+    mv apache-tomcat-${TOMCAT_VERSION} /opt/tomcat && \
+    rm apache-tomcat-${TOMCAT_VERSION}.tar.gz
+
+# Expose the default Tomcat port
 EXPOSE 8080
-CMD /usr/local/tomcat/bin/catalina.sh run
+
+# Start Tomcat
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
