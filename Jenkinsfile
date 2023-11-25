@@ -27,7 +27,7 @@ pipeline {
 
                     // Build Docker image
                     echo "Building Docker image"
-                    sh "docker build -x -t ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:${TAG} ."
+                    sh "docker build -t ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:${TAG} -x ."
                     
                     // Push Docker image to Docker Hub
                     echo "Pushing Docker image to Docker Hub"
