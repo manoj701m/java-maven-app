@@ -35,6 +35,7 @@ pipeline {
                 script {
                     // Docker login using hardcoded credentials
                     echo "Logging in to Docker Hub"
+                    sh 'docker builder prune --all --force'
                     sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
 
                     // Build Docker image
