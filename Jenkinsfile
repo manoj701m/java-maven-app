@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
-        $DOCKERHUB_USERNAME = 'manoj701m'
+        DOCKERHUB_USERNAME = 'manoj701m'
         IMAGE_NAME = 'tomcat8custom'
         TAG = ${env.BUILD_NUMBER}
     }
